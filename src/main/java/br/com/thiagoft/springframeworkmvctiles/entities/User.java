@@ -1,0 +1,88 @@
+package br.com.thiagoft.springframeworkmvctiles.entities;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
+@Entity
+@Table(name="user")
+public class User implements Serializable {
+	
+	private String id; 
+	private String nome;
+	private String email;
+	private String login;
+	private String senha;
+	private Date lastLogin;
+	
+	@Id
+	@Generated(GenerationTime.INSERT)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id", unique=true)
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	@Column(name="nome", length=100)
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	@Column(name="login", length=100, unique=true)
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
+	@Column(name="senha", length=100)
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	@Temporal(value = TemporalType.TIMESTAMP)
+	@Column(name="last_login")
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+	
+	public User(String login, String senha, String nome) {
+		this.login = login;
+		this.senha = senha;
+		this.nome = nome;
+	}
+	
+	@Column(name="email")
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public User() {}
+}

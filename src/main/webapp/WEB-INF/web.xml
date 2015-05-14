@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Prestar atenção nos atributosde web-app -->
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>SpringFramework MVC Com Tiles</display-name>
+	
+	<!-- Servlet springframework -->
+	<!-- Uma vez iniciado, o Servlet irá carregar um container
+	do Spring confiurado via XML por um arquivo chamado WEB-INF/[nome do
+	servlet]-servlet.xml. Sendo assim, de acordo com o código anterior o Servlet
+	buscará pelo arquivo DispatcherServlet-servlet.xml. -->
+	<servlet>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!-- os dois parâmetros abaixo customizam o nome do arquivo de configuração -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/spring-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- mapeamento das URLs a este direcionadas, ou seja, direcionados ao servlet do spring. -->
+	<servlet-mapping>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<!-- urlpattern pode ter alguns modelos de mapeamento listados abaixo:
+			 /: instruí o Servlet Container a tratar nosso Servlet Dispatcher como o padrão a ser invocado para 
+				todas as requisições recebidas pela aplicação;
+			 /**: indica que qualquer requisição independente da URL será direcionada ao nosso servlet;
+			 *.jsp: toda URL terminada com .jsp. Exemplo: http://www.springFórum.com.br/entrada.jsp;
+			 /spring/**: toda URL iniciada com spring. Exemplo: http://www. springFórum.com.br/spring/entrada; -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>

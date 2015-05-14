@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+	
+	<mvc:annotation-driven />
+	
+	<!-- Habilita anotações -->
+	<context:annotation-config />
+	
+	<!-- Scaneia os packages por Controllers -->
+	<context:component-scan base-package="br.com.thiagoft.springframeworkmvctiles" />
+
+	<bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix"><value>/views/</value></property>
+		<property name="suffix"><value>.jsp</value></property>
+	</bean>
+	
+	<!-- Cria um aspecto do tipo after throw para todos os beans anotados com @Repository. A exceção será interceptada 
+	e automaticamente convertida para outra presente na hierarquia de exceções uniformizada do Spring. -->
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<!-- Habilita transações -->
+	<tx:annotation-driven />
+	
+	<!--  -->
+	<mvc:resources mapping="/resources/**" location="/resources/bootstrap/" />
+	
+	<!-- Define as propriedades do datasource de pool de conexões utilizando C3P0 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<property name="user" value="root"/>
+		<property name="password" value="0926"/>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/springdata"/>
+		<property name="maxPoolSize" value="10"/>
+		<property name="acquireIncrement" value="1"/>
+		<property name="maxIdleTime" value="120"/>
+		<property name="acquireRetryAttempts" value="10"/>
+		<property name="initialPoolSize" value="10"/>
+	</bean>
+	<!-- Atenção especial deve ser dada ao atributo destroy-method, incluído na definição do bean. O método close fechará 
+	todas as conexões abertas pelo pool quando seu bean for finalizado pelo container -->
+	
+	<!--• maxPoolSize: define o número máximo de conexões a ser armazenado no pool;
+		• acquireIncrement: a cada requisição por uma conexão, define quantas novas conexões devem ser incluídas no pool caso 
+		este não possua mais conexões disponíveis até atingir o número máximo definido em maxPoolSize;
+		• maxIdleTime: define o tempo máximo em segundos que uma conexão não usada deve ser armazenada no pool;
+		• acquireRetryAttempts: define o número de retentativas na obtenção de uma nova conexão por parte do pool;
+		• initialPoolSize: define o número inicial de conexões que devem existir quando a primeira conexão for solicitada 
+		por alguma classe cliente. -->
+	
+	<!-- Configurações para utilizaçãodo hibernate suportado pelo spring-orm,é possivel utilizar 2 classes caso esteja utilizando
+	hibernate3, org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean ou org.springframework.orm.hibernate3.LocalSessionFactoryBean
+	a diferença está em utilizar xml como forma de configuração ou annotations.
+	No caso do Hibernate 4 org.springframework.orm.hibernate4.LocalSessionFactoryBean substitui as 2 classes e é compativel com
+	os 2 tipos de configuração -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		<!-- Ou definindo apenas os pacotes aonde se encontram nossas
+		classes anotadas -->
+		<property name="packagesToScan" value="br.com.thiagoft.springframeworkmvctiles.entities"/>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+</beans>
