@@ -21,11 +21,6 @@
 	<!-- Scaneia os packages por Controllers -->
 	<context:component-scan base-package="br.com.thiagoft.springframeworkmvctiles" />
 
-	<bean id="viewResolver"	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix"><value>/views/</value></property>
-		<property name="suffix"><value>.jsp</value></property>
-	</bean>
-	
 	<!-- Cria um aspecto do tipo after throw para todos os beans anotados com @Repository. A exceção será interceptada 
 	e automaticamente convertida para outra presente na hierarquia de exceções uniformizada do Spring. -->
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
@@ -33,7 +28,9 @@
 	<!-- Habilita transações -->
 	<tx:annotation-driven />
 	
-	<!--  -->
+	<!-- Habilita o uso de conteudo estático, onde mapping será o prefixo da requisição
+	e location será a localização do diretório é possivel utilizar o atributo
+	cache-period que informa por quanto tempo será mantido em cache as requisições a recursos -->
 	<mvc:resources mapping="/resources/**" location="/resources/bootstrap/" />
 	
 	<!-- Define as propriedades do datasource de pool de conexões utilizando C3P0 -->
@@ -80,5 +77,35 @@
 	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<!-- ViewResolver específico do Apache Tiles suportado pelo spring -->
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	</bean>
+	
+	<!-- ViewResolvers
+			• InternalResourceViewResolver : encontra o arquivo de visualização(normalmente JSP) 
+		no classpath da aplicação e o renderiza como resposta;
+			• FreeMarkerViewResolver : visualização baseada no projeto FreeMarker
+		(http://freemarker.sourceforge.net) , que é um motor de templates que se 
+		mostrou bastante popular no passado;
+			• JasperReportsViewResolver : visualização baseada no gerador de relatórios 
+		Jasper Reports (http://jasperforge.org);
+			• TilesViewResolver : uma das opções mais populares adotada em projetos Spring MVC.
+		Permite a criação de interfaces mais elaboradas através de templates. Veremos 
+		mais a respeito do seu uso neste capítulo;
+			• VelocityLayoutViewResolver : usa o Apache Velocity (http://velocity.apache.org) 
+		como tecnologia de visualização;
+			• XsltViewResolver : uma opção bastante interessante para projetos que usem 
+		transformações XSLT na sua camada de visualização. -->
+		
+	<!-- Configurações do ApacheTiles suportado pelo spring -->
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/tiles/tiles-config.xml</value>
+			</list>
+		</property>
 	</bean>
 </beans>
