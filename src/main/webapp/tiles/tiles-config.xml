@@ -13,7 +13,7 @@
     	<put-attribute name="conteudo" value="/views/index.jsp"/>
     </definition>
     
-    <definition name="registro" extends="main">
+    <!-- <definition name="registro" extends="main">
     	<put-attribute name="conteudo" value="/views/signup.jsp"/>
     	<put-attribute name="titulo" value="Bem vindo(a)!"/>
     </definition>
@@ -31,7 +31,7 @@
     
     <definition name="loginFalho" extends="main">
     	<put-attribute name="conteudo" value="/views/loginFalho.jsp"/>
-    </definition>
+    </definition> -->
 
 
 </tiles-definitions>
