@@ -14,6 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <spring.version>4.1.6.RELEASE</spring.version>
     <tiles.versao>2.2.2</tiles.versao>
+    <hibernate.version>4.3.9.Final</hibernate.version>
   </properties>
   
   <dependencies>
@@ -64,7 +65,15 @@
 	<dependency>
 		<groupId>org.hibernate</groupId>
 		<artifactId>hibernate-core</artifactId>
-		<version>4.3.9.Final</version>
+		<version>${hibernate.version}</version>
+	</dependency>
+	
+	<!-- Hibernate Bean Validator implementação da JSR-303 pode ser usado sem o core 
+	hibernate -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-validator</artifactId>
+		<version>5.1.3.Final</version>
 	</dependency>
 	
 	<!-- Apache Tiles para o composite view -->

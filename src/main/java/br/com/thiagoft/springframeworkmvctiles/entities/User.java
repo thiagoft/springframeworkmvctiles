@@ -19,6 +19,20 @@ import org.hibernate.annotations.GenerationTime;
 @Table(name="user")
 public class User implements Serializable {
 	
+	/* Validações do Bean Validator mais utilizadas
+		- @NotNull : garante que o atributo anotado não possua valor nulo;
+		- @NotEmpty : aplicável a coleções ou strings, verifica se o texto digitado está
+	em branco ou se a lista está vazia;
+		- @Size : usada para garantir que o tamanho de um texto esteja dentro dos pa-
+	râmetros limitadores min ou max. Importante salientar que não é necessária
+	a presença dos dois parâmetros, mas sim ao menos um;
+		- @Email : específica do Hibernate MVC, é usada para garantir que o valor do
+	atributo seja um endereço de e-mail válido formalmente ;
+		- @Pattern : recebe como parâmetro obrigatório regexp representando uma
+	expressão regular contra a qual será validado o atributo anotado. Talvez seja
+	a anotação mais poderosa da JSR-303 devido à grande flexibilidade oferecida
+	pelas expressões regulares.*/
+	
 	private String id; 
 	private String nome;
 	private String email;
