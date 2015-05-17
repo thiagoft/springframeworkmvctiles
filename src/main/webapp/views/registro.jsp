@@ -11,13 +11,23 @@
 	<sf:form modelAttribute="user" action="executarRegistro">
 		<label for="nome">Nome:</label>
 		<sf:input path="nome"/>
-		<label for="email">Email:</label>
+		<label for="email">Email:<sf:errors path="email" /></label>
 		<sf:input path="email"/>
-		<label for="login">Nome do usuário (login):</label>
+		<label for="login">Nome do usuário (login):<sf:errors path="login" /></label>
 		<sf:input path="login"/>
-		<label for="senha">Senha:</label>
+		<label for="senha">Senha:<sf:errors path="senha" /></label>
 		<sf:password path="senha"/>
 		<input type="submit" value="Cadastrar"/>
+		
+		<!-- Outras propriedades de sd:errors
+		 	- cssClass : adiciona uma classe de css ao elemento;
+		 	- element : define qual elemento HTML que irá envolver cada mensagem de
+			erro;
+			- cssStyle : permite ao desenvolvedor incluir estilo CSS customizado para
+			uma localização específica;
+			- delimiter : que texto será usado para separar as mensagens de erro expostas.
+			Seu valor padrão é <BR/>.
+		 -->
 		
 		<!-- Outras tags de form do spring 
 			- checkbox : usada para renderizar campos do tipo caixa de seleção;

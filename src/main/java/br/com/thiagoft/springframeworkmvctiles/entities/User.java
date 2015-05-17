@@ -11,9 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="user")
@@ -34,9 +38,18 @@ public class User implements Serializable {
 	pelas expressões regulares.*/
 	
 	private String id; 
+	
 	private String nome;
+	
+	@Email(message="Isto não é um e-mail válido") @NotNull @NotEmpty
 	private String email;
+	
+	@NotNull @NotEmpty
+	@Size(min=8, max=32, message="Login muito curto ou muito longo")
 	private String login;
+	
+	@NotNull @NotEmpty
+	
 	private String senha;
 	private Date lastLogin;
 	
