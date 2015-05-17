@@ -31,7 +31,7 @@
 	<!-- Habilita o uso de conteudo estático, onde mapping será o prefixo da requisição
 	e location será a localização do diretório é possivel utilizar o atributo
 	cache-period que informa por quanto tempo será mantido em cache as requisições a recursos -->
-	<mvc:resources mapping="/resources/**" location="/resources/bootstrap/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	<!-- Define as propriedades do datasource de pool de conexões utilizando C3P0 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">

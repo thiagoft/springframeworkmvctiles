@@ -17,7 +17,9 @@
 		</title>
 		
 		<!-- Bootstrap core CSS -->
-		<link href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet">
+		<link href="<c:url value="/resources/bootstrap/css/bootstrap.css"/>" rel="stylesheet">
+		<!-- My - CSS -->
+		<link href="<c:url value="/resources/mytheme.css"/>" rel="stylesheet">
 		
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -30,16 +32,18 @@
 	<body>
 		<!-- Inclusão do cabeçalho -->
 		<tiles:insertAttribute name="cabecalho"/>
-		<!-- Inclusão do conteúdo -->
-		<tiles:insertAttribute name="conteudo"/>
-		<!-- Inclusão do rodapé -->
-		<tiles:insertAttribute name="rodape"/>
-		
-		<!-- Bootstrap core JavaScript -->
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
+		<div class="container" >
+			<!-- Inclusão do conteúdo -->
+			<tiles:insertAttribute name="conteudo"/>
+			<!-- Inclusão do rodapé -->
+			<tiles:insertAttribute name="rodape"/>
+			
+			<!-- Bootstrap core JavaScript -->
+			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+			<!-- Include all compiled plugins (below), or include individual files as needed -->
+			<script src="<c:url value="/resources/js/bootstrap.js"/>"></script>
+		</div>
     
 	</body>
 </html>
