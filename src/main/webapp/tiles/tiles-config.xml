@@ -18,12 +18,12 @@
     	<put-attribute name="titulo" value="Bem vindo(a)!"/>
     </definition>
     
-    <!-- <definition name="usuario/show" extends="main">
-    	<put-attribute name="conteudo" value="/views/usuario/show.jsp"/>
+    <definition name="user/show" extends="main">
+    	<put-attribute name="conteudo" value="/views/user/show.jsp"/>
     	<put-attribute name="titulo" value="Detalhes do usuário"/>
     </definition>
     
-    <definition name="assunto/show" extends="main">
+    <!-- <definition name="assunto/show" extends="main">
     	<put-attribute name="conteudo" value="/views/assunto/show.jsp"/>
     </definition>
     

@@ -1,8 +1,15 @@
 package br.com.thiagoft.springframeworkmvctiles.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,4 +37,20 @@ public class UserController {
 	 Map<String, Object> do Java;
 	 - void clear() : limpa o modelo.*/
 	
+	@RequestMapping("/user/avatar/{login}")
+	@ResponseBody
+	public byte[] avatar(@PathVariable("login") String login) throws IOException {
+		File arquivo = new File("/springframeworkmvctiles/avatars/" + login + ".png");
+		
+		if (! arquivo.exists()) {
+			arquivo = new File("/springframeworkmvctiles/avatars/avatar.png");
+		}
+		
+		byte[] resultado = new byte[(int)arquivo.length()];
+		FileInputStream input = new FileInputStream(arquivo);
+		input.read(resultado);
+		input.close();
+		
+		return resultado;	
+	}
 }
