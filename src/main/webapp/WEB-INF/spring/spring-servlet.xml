@@ -108,4 +108,11 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- Bean responsável por interceptar requisições de formulário com enctype
+	do tipo multipart/form-data. Deve chamar obrigatoriamente multipartResolver,
+	pois o DispatcherServlet buscará um bean com este nome para lidar com uploads -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1048576"/>
+	</bean>
 </beans>

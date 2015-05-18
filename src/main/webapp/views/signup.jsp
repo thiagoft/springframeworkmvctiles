@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
 	<div class="container" >
-		<sf:form modelAttribute="user" action="executarRegistro">
+		<sf:form modelAttribute="user" action="executarRegistro" enctype="multipart/form-data" >
 			<div class="form-group">
 				<label for="nome">Nome:</label>
 				<sf:input path="nome" cssClass="form-control" />
@@ -18,6 +18,11 @@
 			<div class="form-group">
 				<label for="senha">Senha:<sf:errors path="senha" /></label>
 				<sf:password path="senha" cssClass="form-control" />
+			</div>
+			
+			<div class="form-group">
+				<label for="avatar">Avatar:</label>
+				<input type="file" name="avatar"/>
 			</div>
 			<button type="submit" value="Cadastrar" class="btn btn-default" >Salvar</button>
 			
