@@ -15,7 +15,8 @@
 	
 	<mvc:annotation-driven />
 	
-	<!-- Habilita anotações -->
+	<!-- Habilita anotações de transações, possui o atributo transaction-manager=""
+	que por default encontra o primeiro bean chamado "transactionManager".-->
 	<context:annotation-config />
 	
 	<!-- Scaneia os packages por Controllers -->
@@ -25,7 +26,8 @@
 	e automaticamente convertida para outra presente na hierarquia de exceções uniformizada do Spring. -->
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-	<!-- Habilita transações -->
+	<!-- Habilita transações por anotação, possui o atributo transaction-manager="" que não
+	é obrigatório, seu valor default será o primeiro bean transactionManager encontrado -->
 	<tx:annotation-driven />
 	
 	<!-- Habilita o uso de conteudo estático, onde mapping será o prefixo da requisição
@@ -75,6 +77,7 @@
 		<property name="packagesToScan" value="br.com.thiagoft.springframeworkmvctiles.entities"/>
 	</bean>
 	
+	<!-- Gerenciamento de transações do Spring -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
