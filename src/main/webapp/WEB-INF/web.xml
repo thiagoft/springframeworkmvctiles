@@ -5,6 +5,20 @@
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>SpringFramework MVC Com Tiles</display-name>
 	
+	<!-- Listener responsável por carregar um contexto do spring para a app utilizando
+	os arquivos de configuração passados em context-param -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring/spring-servlet.xml
+			/WEB-INF/spring/spring-security.xml
+		</param-value>
+	</context-param> 
+		
 	<!-- Servlet springframework -->
 	<!-- Uma vez iniciado, o Servlet irá carregar um container
 	do Spring confiurado via XML por um arquivo chamado WEB-INF/[nome do
@@ -32,5 +46,19 @@
 			 /spring/**: toda URL iniciada com spring. Exemplo: http://www. springFórum.com.br/spring/entrada; -->
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+	<!-- Configuração do filtro básico da aplicação para o Spring Security -->
+	<filter>
+		<!-- O nome do filtro é importante:
+		ele aponta para o nome de um bean de mesmo nome que será criado internamente pelo
+		Spring Security para lidar com a segurança de requisições. -->
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 </web-app>

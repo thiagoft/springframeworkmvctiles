@@ -11,12 +11,12 @@
 			<a class="navbar-brand" href="#">Projeto Spring MVC</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
-			<form class="navbar-form navbar-right" action="<c:url value="/login"/>" method="post">
+			<form class="navbar-form navbar-right" action="<c:url value="/j_spring_security_check"/>" method="post">
 				<div class="form-group">
-					<input type="text" placeholder="Email" class="form-control" name="login" >
+					<input type="text" placeholder="Email" class="form-control" name="j_username" />
 				</div>
 				<div class="form-group">
-					<input type="password" placeholder="Password" class="form-control" name="senha">
+					<input type="password" placeholder="Password" class="form-control" name="j_password" />
 				</div>
 				<button type="submit" class="btn btn-success">Entrar</button>
 			</form>
